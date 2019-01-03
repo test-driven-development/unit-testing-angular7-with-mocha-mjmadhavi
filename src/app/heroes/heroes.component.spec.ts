@@ -74,7 +74,7 @@ describe('Heroes Component', () => {
     return component.getHeroesList().then((heroes) => {
 
     // assert
-    heroes.should.deepEqual([{}]);
+    heroes.should.deepEqual(HEROES);
     });
   });
 
