@@ -13,6 +13,7 @@ describe('MessageService', () => {
     (service.messages.length).should.equal(1);
   });
   it('should clear all messages when clear is called', () => {
+    service.add('message1');
     service.clear();
     (service.messages.length).should.equal(0);
   });
