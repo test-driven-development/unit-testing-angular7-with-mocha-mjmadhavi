@@ -1,6 +1,5 @@
 import {Hero} from '../hero';
 import {HeroesComponent} from './heroes.component';
-import {HeroService} from '../hero.service';
 import {of} from 'rxjs';
 import {constructor} from 'testdouble';
 
@@ -21,7 +20,7 @@ describe('Heroes Component', () => {
     // system under test requires a service to be passed to constructor
     // need a mock service since we do not what to make http call in our test
     // with jasmine we can use spy object for mocking here we will use testdouble
-    // require and create heroService testdouble
+    // require and create heroService
     service = new (constructor(require('../hero.service').HeroService))();
   });
 
@@ -30,7 +29,7 @@ describe('Heroes Component', () => {
   });
 
   it('collaborates with the heroes service to delete hero (observable)', () => {
-
+    // testdouble
     when(service.deleteHero(HEROES[0])).thenReturn(of());
     // setup system under test
     component = new HeroesComponent(service);
@@ -46,7 +45,7 @@ describe('Heroes Component', () => {
   });
 
   it('collaborates with the heroes service to delete hero (promise)', () => {
-
+    // testdouble
     when(service.deleteHero(HEROES[0])).thenReturn(of());
     // setup system under test
     component = new HeroesComponent(service);
@@ -64,6 +63,7 @@ describe('Heroes Component', () => {
   });
 
   it('collaborates with the heroes service to get heroes', () => {
+    // testdouble
     when(service.getHeroes()).thenReturn(of());
     // setup system under test
     component = new HeroesComponent(service);
@@ -79,6 +79,7 @@ describe('Heroes Component', () => {
   });
 
   it('collaborates with the heroes service to add hero', () => {
+    // testdouble
     const hero = { name: 'Bond', strength: 77};
     const heroReturned = {id: 4, name: 'Bond', strength: 77};
     when(service.addHero(hero)).thenReturn(of(heroReturned));
