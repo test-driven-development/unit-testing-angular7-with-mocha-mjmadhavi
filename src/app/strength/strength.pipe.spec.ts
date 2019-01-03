@@ -7,6 +7,6 @@ describe('StrengthPipe', () => {
     (new StrengthPipe()).transform(18).should.equal('18 (strong)');
   });
   it('gives "unbelievable" for n >= 20' , () => {
-    (new StrengthPipe()).transform(2 ).should.equal('28 (unbelievable)');
+    (new StrengthPipe()).transform(28 ).should.equal('28 (unbelievable)');
   });
 });
