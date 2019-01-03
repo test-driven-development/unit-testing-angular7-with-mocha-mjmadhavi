@@ -24,7 +24,7 @@ export class HeroesComponent implements OnInit {
       .subscribe(heroes => this.heroes = heroes);
   }
 
-  getHeroesList(): Promise<any> {
+  getHeroesList(): Promise<Hero[]> {
     return this.heroService.getHeroes().toPromise().then(() => {
       return this.heroes;
     });
@@ -40,6 +40,21 @@ export class HeroesComponent implements OnInit {
       .subscribe(hero => {
         this.heroes.push(hero);
       });
+  }
+
+  addHero( name: string, strength?: number ): Promise<Hero> {
+    name = name.trim();
+    if (!name) {
+      return;
+    }
+    if (!strength) {
+      strength = 11;
+    }
+    return this.heroService.addHero({name, strength} as Hero)
+      .toPromise().then((hero) => {
+        this.heroes.push(hero);
+        return hero;
+    });
   }
 
   // returns observable

@@ -73,10 +73,27 @@ describe('Heroes Component', () => {
     // act
     return component.getHeroesList().then((heroes) => {
 
-    // assert
-    heroes.should.deepEqual(HEROES);
+      // assert
+      heroes.should.deepEqual(HEROES);
     });
   });
 
-  it('collaborates with the heroes service to add hero');
+  it('collaborates with the heroes service to add hero', () => {
+    const hero = { name: 'Bond', strength: 77};
+    const heroReturned = {id: 4, name: 'Bond', strength: 77};
+    when(service.addHero(hero)).thenReturn(of(heroReturned));
+    // setup system under test
+    component = new HeroesComponent(service);
+
+    component.heroes = HEROES;
+    component.heroes.length.should.equal(3);
+    // act
+    return component.addHero('Bond', 77).then((heroFromService) => {
+
+      // assert
+      component.heroes.length.should.equal(4);
+      component.heroes[3].should.deepEqual(heroFromService);
+    });
+
+  });
 });
