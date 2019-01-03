@@ -13,7 +13,7 @@ describe('Heroes Component', () => {
   beforeEach(() => {
     // arrange
     HEROES = [
-      {id: 2, name: 'WonderfulWoman', strength: 24},
+      {id: 1, name: 'SpiderDude', strength: 8},
       {id: 2, name: 'WonderfulWoman', strength: 24},
       {id: 3, name: 'SuperDude', strength: 55}
     ];
