@@ -63,6 +63,20 @@ describe('Heroes Component', () => {
 
   });
 
-  it('collaborates with the heroes service to get heroes');
+  it('collaborates with the heroes service to get heroes', () => {
+    when(service.getHeroes()).thenReturn(of());
+    // setup system under test
+    component = new HeroesComponent(service);
+
+    component.heroes = HEROES;
+    component.heroes.length.should.equal(3);
+    // act
+    return component.getHeroesList().then((heroes) => {
+
+    // assert
+    heroes.should.deepEqual([{}]);
+    });
+  });
+
   it('collaborates with the heroes service to add hero');
 });

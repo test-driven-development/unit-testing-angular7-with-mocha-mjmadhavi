@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {Hero} from '../hero';
 import {HeroService} from '../hero.service';
+import {promise} from 'selenium-webdriver';
 
 @Component({
   selector: 'app-heroes',
@@ -21,6 +22,12 @@ export class HeroesComponent implements OnInit {
   getHeroes(): void {
     this.heroService.getHeroes()
       .subscribe(heroes => this.heroes = heroes);
+  }
+
+  getHeroesList(): Promise<any> {
+    return this.heroService.getHeroes().toPromise().then(() => {
+      return this.heroes;
+    });
   }
 
   add(name: string): void {
