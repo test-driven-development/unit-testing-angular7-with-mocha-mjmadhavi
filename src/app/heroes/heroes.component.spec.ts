@@ -42,7 +42,7 @@ describe('Heroes Component', () => {
     component.delete(HEROES[0]);
 
     // assert
-    component.heroes.length.should.equal(0);
+    component.heroes.length.should.equal(2);
   });
 
   it('collaborates with the heroes service to get heroes');
