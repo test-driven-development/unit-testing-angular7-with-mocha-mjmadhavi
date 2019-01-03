@@ -22,14 +22,14 @@ describe('Heroes Component', () => {
     // need a mock service since we do not what to make http call in our test
     // with jasmine we can use spy object for mocking here we will use testdouble
     // require and create heroService testdouble
-    service = new(constructor(require('../hero.service').HeroService))();
+    service = new (constructor(require('../hero.service').HeroService))();
   });
 
   it('has passing canary test', () => {
     true.should.be.true('automated test infrastructure not working');
   });
 
-  it('collaborates with the heroes service to delete hero', () => {
+  it('collaborates with the heroes service to delete hero (observable)', () => {
 
     when(service.deleteHero(HEROES[0])).thenReturn(of());
     // setup system under test
@@ -43,6 +43,24 @@ describe('Heroes Component', () => {
 
     // assert
     component.heroes.length.should.equal(2);
+  });
+
+  it('collaborates with the heroes service to delete hero (promise)', () => {
+
+    when(service.deleteHero(HEROES[0])).thenReturn(of());
+    // setup system under test
+    component = new HeroesComponent(service);
+
+    component.heroes = HEROES;
+    component.heroes.length.should.equal(3);
+
+    // act
+    return component.deleteHero(HEROES[0]).then((hero) => {
+      // assert
+      component.heroes.length.should.equal(2);
+      component.heroes.should.not.containDeep(hero);
+    });
+
   });
 
   it('collaborates with the heroes service to get heroes');
