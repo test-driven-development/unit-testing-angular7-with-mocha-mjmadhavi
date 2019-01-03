@@ -25,9 +25,12 @@ describe('Hero Component (Shallow Tests)', () => {
     getTestBed().resetTestingModule();
   });
 
-  it('has a passing canary test',  () => {
+  it('has a passing canary test', () => {
     true.should.be.true(' automated test infrastructure failing');
   });
 
-  it('should have the correct Hero');
+  it('should have the correct Hero', () => {
+    fixture.componentInstance.hero = {id: 1, name: 'SuperDude', strength: 55};
+    (fixture.componentInstance.hero.name).should.equal('SuperDude');
+  });
 });
