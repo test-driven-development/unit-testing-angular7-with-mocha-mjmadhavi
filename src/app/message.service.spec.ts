@@ -8,6 +8,9 @@ describe('MessageService', () => {
   it('should have no messages to start', () => {
     (service.messages.length).should.equal(0);
   });
-  it('should add a message when add is called');
+  it('should add a message when add is called', () => {
+    service.add('message1');
+    (service.messages.length).should.equal(0);
+  });
   it('should clear all messages when clear is called');
 });
