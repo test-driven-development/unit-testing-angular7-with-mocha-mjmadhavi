@@ -33,4 +33,14 @@ describe('Hero Component (Shallow Tests)', () => {
     fixture.componentInstance.hero = {id: 1, name: 'SuperDude', strength: 55};
     (fixture.componentInstance.hero.name).should.equal('SuperDude');
   });
+
+  it('should render the hero name in an anchor tag', function () {
+    // exterior component sets the property replicated by manually setting it
+    fixture.componentInstance.hero = {id: 1, name: 'SuperDude', strength: 55};
+    // execute change detection and update bindings
+    fixture.detectChanges();
+    // get handle of the dom element by anchor tag then take inner text ignoring html
+    const compiled: HTMLElement = fixture.nativeElement;
+    (compiled.querySelector('a').textContent).should.containEql('SuperDude');
+  });
 });
