@@ -1,6 +1,7 @@
 import {ComponentFixture, getTestBed, TestBed} from '@angular/core/testing';
 import {HeroComponent} from './hero.component';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
+import {By} from '@angular/platform-browser';
 
 describe('Hero Component (Shallow Tests)', () => {
   let fixture: ComponentFixture<HeroComponent>;
@@ -40,7 +41,13 @@ describe('Hero Component (Shallow Tests)', () => {
     // execute change detection and update bindings
     fixture.detectChanges();
     // get handle of the dom element by anchor tag then take inner text ignoring html
-    const compiled: HTMLElement = fixture.nativeElement;
-    (compiled.querySelector('a').textContent).should.containEql('SuperDude');
+    const compiledNe: HTMLElement = fixture.nativeElement;
+    (compiledNe.querySelector('a').textContent).should.containEql('SuperDude');
+    // debugElement wrapper to native element with added functionality
+    const compiledDeA: DebugElement = fixture.debugElement;
+    // query function on debug element takes predicate
+    // use By library from angular platform-browser
+    (compiledDeA.query(By.css('a')).nativeElement.textContent).should.containEql('SuperDude');
+
   });
 });
